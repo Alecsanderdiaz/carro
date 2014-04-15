@@ -1,0 +1,319 @@
+<html>
+
+ <head>
+
+ <title>Mimeteo</title>
+
+ <link rel="stylesheet" type="text/css" media="all" href="/site_media/css/base.css" />
+
+ <link rel="stylesheet" type="text/css" media="all" href="/site_media/css/labs/mimeteo.css" />
+
+ <script type="text/javascript" src="/site_media/js/OpenLayers-2.12/OpenLayers.js"></script>
+
+ <script src='http://maps.google.com/maps/api/js?sensor=false&v=3.2'></script>
+
+ <script type="text/javascript" src="/site_media/js/jquery-1.7.2.min.js"></script>
+
+ <script type='text/javascript'>
+
+  var map;
+
+  OpenLayers.Control.Click = OpenLayers.Class(
+
+  OpenLayers.Control, {
+
+    // Los parametros de mi control Click
+
+    defaultHandlerOptions: {
+
+    'single' : true,
+
+    'double' : false,
+
+    'pixelTolerance' : 0,
+
+    'stopSingle' : false,
+
+    'stopDouble' : false
+
+  },
+
+  initialize: function(options) {
+
+    this.handlerOptions = OpenLayers.Util.extend(
+
+    {}, this.defaultHandlerOptions);
+
+    OpenLayers.Control.prototype.initialize.apply(this, arguments);
+
+    this.handler = new OpenLayers.Handler.Click(
+
+    this, {'click' : this.onClick}, this.handlerOptions);
+
+  },
+
+
+  onClick: function(e) {
+
+  // Al hacer clic, desactivo el control Click para empedir que el usuario haga varios clicks antes de recibir la respuesta de su primer click.
+
+  //Lo reactivaré una vez recibida toda la información.
+
+  $('#map_element').bind('click', map.controls[4].deactivate());
+
+
+  // Quiero representar el punto donde el usuario hizo clic con un ícono. Por eso tengo que agregar una capa (ver más abajo).
+
+  // Pero si el usurio hace clic varias veces, quiero solamente mostrar el último lugar seleccionado. Por eso, al hacer clic,
+  // si ya hay una capa con un ícino, la suprimo.
+
+  if (map.layers.length > 2) {
+
+    map.layers[2].destroy();
+
+  };
+
+  // Creo la capa que contiene el ícono
+
+  var marker_icono = new OpenLayers.Layer.Markers( "Marker icono" );
+
+
+  // Agrego una tabla que solamente contienen los 'headers' y que esta invisible por el momento.
+
+  // Esta tabla va contenir los pronósticos
+
+  $('#prediction').html('<table style="display:none" id ="predic"><tr><th>Día</th><th>
+
+    </th><th>Temperatura<br/>(C°)</th><th>Precipitaciones<br/>(Mm)</th>
+
+    <th>Velocidad del viento<br/>(Km/h)</th></tr><tbody>   </tbody></table>')
+
+  
+
+  // Mi capa Google Maps esta proyectada en el SRS (Sistema de Referencia Espacial) EPSG: 900913. Los datos de la API estan en EPSG: 4326 (latitud, longitud).
+
+  // Entonces necesitamos realizar una transformación de proyección
+
+  var proj_4326 = new OpenLayers.Projection('EPSG:4326');
+
+  var proj_900913 = new OpenLayers.Projection('EPSG:900913');
+
+ 
+
+  // La variable 'coord' contiene las coordenadas del punto donde el ususario hizo clic. Este punto esta en el SRS EPSG: 900913
+
+  var coord = map.getLonLatFromViewPortPx(e.xy);
+
+
+  // Aca transformo mi punto en EPSG: 900913 en EPSG: 4326:
+
+  var pt_trans = new OpenLayers.LonLat(coord.lon, coord.lat).transform(proj_900913, proj_4326);
+
+
+  // A continuación son las variables que van a definir mi ícono (tamaño, ubicación y imagen)
+
+  var size = new OpenLayers.Size(20,29);
+
+  var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+
+  var icono = new OpenLayers.Icon('/site_media/img/labs/mimeteo/icone.png',size,offset);
+
+  marker_icono.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(coord.lon, coord.lat),icono));
+
+
+   // Agrego la capa que contiene el icono en el mapa
+  map.addLayer(marker_icono);
+
+ 
+
+  // Aca utilizamos la función 'ajax' de JQuery para ejecutar la view Django meteo_out y recuperar los datos de la API
+
+  $.ajax({
+
+    type: "GET",
+
+    // El URL de mi view Django
+
+    url: 'meteo_out',
+
+    // Paso a mi 'view' Django meteo_out los parametros que necesita
+
+    // El valor del parametro 'dias' corresponde al valor que ha escogido el usuario en el menú deslizante
+
+    data : {longitude:pt_trans.lon, latitude:pt_trans.lat, dias: $('select').val()},
+
+    dataType: "json",
+
+    success: function(data) {
+
+    // Recupero los datos en una variable Javascript que llamo 'datos_meteo'. Corresponde a la variable respuesta2 de mi 'view' meteo_out.
+
+    var datos_meteo = data;
+
+
+      // Ahora tengo los datos (que incluyen también las imagenes) de la API y puedo mostrarlos en mi página HTML
+    $('h4').show()
+
+    $('td#hr').html(datos_meteo.data.current_condition[0].observation_time)
+
+    $('td#i').html('<img src='+ datos_meteo.data.current_condition[0].weatherIconUrl[0].value +'>')
+
+    $('td#t').html(datos_meteo.data.current_condition[0].temp_C)
+
+    $('td#h').html(datos_meteo.data.current_condition[0].humidity)
+
+    $('td#n').html(datos_meteo.data.current_condition[0].cloudcover)
+
+    $('td#p').html(datos_meteo.data.current_condition[0].precipMM)
+
+    $('td#v').html(datos_meteo.data.current_condition[0].windspeedKmph)
+
+
+    $('table#result').show()
+
+    // Lleno mi tabla de pronósticos 
+
+    for (var i = 1; i < datos_meteo.data.weather.length; i++) {
+
+      $('table#predic').append($('<tr><td>'+ datos_meteo.data.weather[i].date + '</td><td><img src=' + datos_meteo.data.weather[i].weatherIconUrl[0].value +'></td><td><b>'+ datos_meteo.data.weather[i].tempMaxC + '</b><hr />'+ datos_meteo.data.weather[i].tempMinC + '</td><td>'+ datos_meteo.data.weather[i].precipMM + '</td><td>'  +  datos_meteo.data.weather[i].windspeedKmph + '</td></tr>'))
+
+  };
+
+      $('table#predic').show()
+
+      // Ahora puedo reactivar mi control Click
+
+      map.controls[4].activate();
+
+  },
+
+    crossDomain: false
+
+  });
+
+  }
+
+  }
+
+  );
+
+  function init() {
+
+  map = new OpenLayers.Map('map_element', {
+
+    projection: 'EPSG: 900913',
+
+    units: 'm',
+
+    numZoomLevels: 9
+
+  });
+
+
+  var google_map_layer = new OpenLayers.Layer.Google( "Google Physical", {type: google.maps.MapTypeId.TERRAIN, 'sphericalMercator': true } );
+
+  var vector_layer = new OpenLayers.Layer.Vector('capa vector', {});
+
+  map.addLayers([google_map_layer, vector_layer]);
+
+  map.setCenter(new OpenLayers.LonLat(-8350592.4649365,-1145046.9871383),5);
+
+ 
+
+  var click = new OpenLayers.Control.Click();
+
+  map.addControl(click);
+
+  click.activate();
+
+  }
+
+  </script>
+
+  </head>
+
+  <body onload='init();'><br />
+
+    <p id="ayuda">Para usar Mimeteo, escoge cuantos días de pronósticos quieres.
+
+    Luego haz clic en el mapa en el lugar donde quieres conocer
+
+    el clima. Los resultados aparecerán debajo del mapa.</p>
+
+    <br />
+
+    <div id="choix">Quiero conocer el último boletín meteorológico y los pronósticos hasta:
+
+    <SELECT name="menu">
+
+      <OPTION VALUE="2">mañana</OPTION>
+
+      <OPTION VALUE="3">2 días</OPTION>
+
+      <OPTION VALUE="4">3 días</OPTION>
+
+     <OPTION VALUE="5">4 días</OPTION>
+
+   </SELECT>
+
+   </div>
+
+  <br/>
+
+  <div id='map_element'></div>
+
+  <br/>
+
+  <h4>Último boletín:</h3>
+
+  <table style="display:none" id ="result">
+
+  <tr>
+
+  <th>Hora de Perú</th>
+
+  <th></th>
+
+  <th>Temperatura (C°)</th>
+
+  <th>Humedad (%)</th>
+
+  <th>Precipitaciones (Mm)</th>
+
+  <th>Cobertura de nubes (%)</th>
+
+  <th>Velocidad del viento (Km/h)</th>
+
+  </tr>
+
+  <tr>
+
+  <td id="hr"></td>
+
+  <td id="i"></td>
+
+  <td id="t"></td>
+
+  <td id="h"></td>
+
+  <td id="p"></td>
+
+  <td id="n"></td>
+
+  <td id="v"></td>
+
+  </tr>
+
+  </table>
+
+  <br/>
+
+  <h4>Pronósticos:</h3>
+
+  <div id='prediction'>
+
+  </div>
+
+  </body>
+
+</html>

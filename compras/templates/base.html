@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>{%block title%} bienvenidos {%endblock%}</title>
+  {% load staticfiles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap-responsive.css' %}" />
+  <script src="{% static 'js/jquery.js' %}"></script>
+  <script src="{% static 'js/codigo.js' %}"></script>
+  <script src="{% static 'js/jquery.form.min.js' %}"></script>
+  <script src="{% static 'js/eliminarcarro.js' %}"></script>
+  <script src="{% static 'js/agregarcarro.js' %}"></script>
+  <script src="{% static 'js/agregarcarro2.js' %}"></script>
+  <script src="{% static 'js/hada.js' %}"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+</head>
+<body>
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <a class="brand" href="/inicio/"> Inicio </a>
+          <ul class="nav">
+            <li> <a href="/inicio/carro"> carro </a> </li>
+            <li> <a href="/inicio/vaciarcarro"> vaciar </a> </li>
+            <li> <a href="/inicio/pagina2"> Pagina2 </a> </li>
+            <li> <a href="/inicio/pagina3"> Pagina3 </a> </li>
+          </ul>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+                <div class="span9">
+                  <div class="hero-unit">
+                    {% block contenido %}
+                    {% endblock%}
+                  </div>
+                </div>
+
+                <div class="span3">
+                  <div class="well sidebar-nav">
+                    <ul class="nav nav-list">
+                      <li class="nav-header"><a href="/inicio/carro">Mi carrito</a></li>
+                      <br>
+                      <div id ="cuerpo_carrito">
+                        <a href="javascript:document.location.reload();">Actualizar Carrito</a><br>
+                        <table id="tabla_productos"></table>
+                      </div>
+                      <li class="nav-header"><a href="/inicio/vaciarcarro">Vaciar</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+      </div>
+    </div>
+
+    
+
+          <footer>
+            <p>&copy; Open Project 2013. Versión Django: {{django_version}}</p> 
+          </footer>
+</body>
+</html>
+
+
+
+
+

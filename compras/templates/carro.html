@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block titulo %}Universal Club{% endblock %}
+{% block contenido %}
+
+
+<!--Modal Eliminar-->
+ <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+    <h3 id="myModalLabel">Eliminar Producto</h3>
+    </div>
+    <div class="modal-body">
+    <p>¿Realmente desea eliminar el producto <span id="modal_name"></span>?</p>
+    </div>
+    <div class="modal-footer">
+        <form method="post" id="frmEliminar">
+            {% csrf_token %}
+            <input type="hidden" id="modal_idProducto" name="product_id">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+<!--EndModal-->
+
+
+{% if zk %}
+   <table class="table table-hover" id="tabla_productos">
+    <thead>
+        <tr>
+            <th>Cantidad</th>
+            <th>Producto</th>
+            <th>Elliminar</th>
+            
+        </tr>
+    </thead>
+    
+    {% for p in zk %} 
+    <tbody>
+        <tr id="tr{{p.id}}">
+
+
+            <td> {{canti}} </td>
+            <td>{{p.nombre}}</td>
+            <td><a href="#myModal" role="button" class="btn btn-danger delete" data-toggle="modal" id="{{p.id}}" data-name="{{p.nombre}}"><i class="icon-trash icon-white"></i>Eliminar</a></td>
+            
+            <td>       
+                <form method="post" id="frmEliminar">
+                    {% csrf_token %}
+                    <a href="#" class="delete" id="{{p.id}}" data-name="{{p.nombre}"></a>
+                    <input type="hidden" id="modal_idProducto2" name="product_id" value="{{p.id}}">
+                    <button type="submit" class="btn btn-danger">Aformulario</button>
+                </form>
+            </td>
+
+
+
+        </tr>
+    </tbody>
+    {% endfor %}
+
+   </table>
+
+
+{% else %}
+<h2>No hay productos en tu carrito :( </h2>
+
+
+{% endif %} 
+
+
+
+{% endblock %}
+
