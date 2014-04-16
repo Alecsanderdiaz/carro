@@ -33,13 +33,19 @@
             
         </tr>
     </thead>
-    
-    {% for p in zk %} 
+
+
+{% for p in zk %}
+  {% for q in canti %}
+    {% if forloop.counter == forloop.parentloop.counter %}
+
+
+
     <tbody>
         <tr id="tr{{p.id}}">
 
 
-            <td> {{canti}} </td>
+            <td> {{q}} </td>
             <td>{{p.nombre}}</td>
             <td><a href="#myModal" role="button" class="btn btn-danger delete" data-toggle="modal" id="{{p.id}}" data-name="{{p.nombre}}"><i class="icon-trash icon-white"></i>Eliminar</a></td>
             
@@ -56,8 +62,9 @@
 
         </tr>
     </tbody>
-    {% endfor %}
-
+    {% endif %}
+  {% endfor %}
+{% endfor %}
    </table>
 
 
