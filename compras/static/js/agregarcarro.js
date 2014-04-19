@@ -22,6 +22,11 @@ var nombre_ventana_modal2 = "#myModal2"; // id
                         alert("agregado!");
                         var idProd = response.product_id2;
                         $('#tr'+idProd).append();
+                        
+                        var cantidad = $("#cant").text();
+                        cantid = parseInt(cantidad) + 1;
+                        $('#cant').text(cantid);
+
                         $(nombre_ventana_modal2).modal('hide');
                     }else{
                         //alert("Hubo un error al agregar!");

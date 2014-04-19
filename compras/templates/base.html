@@ -35,6 +35,27 @@
             <li> <a href="/inicio/vaciarcarro"> vaciar </a> </li>
             <li> <a href="/inicio/pagina2"> Pagina2 </a> </li>
             <li> <a href="/inicio/pagina3"> Pagina3 </a> </li>
+
+              <div class="btn-group">
+                <button type="button" class="btn btn-danger dropdown-toggle renault" data-toggle="dropdown"><i class="icon-shopping-cart"></i>&nbsp;|&nbsp;<span id="cant">{{bu }}</span>&nbsp;items
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  {% if zk %}
+                    {% for p in zk %}
+                      {% for q in canti %}
+                        {% if forloop.counter == forloop.parentloop.counter %}
+                          <li>&nbsp;&nbsp;{{q}} | {{p.nombre}}</li>
+                        {% endif %}
+                        {% endfor %}
+                      {% endfor %}
+                    {% else %}
+                      <li>vacio</li>
+                    {% endif %} 
+                  <li class="divider"></li>
+                  <li><a href="/inicio/carro">Mi Carro</a></li>
+                </ul>
+              </div>
+            
           </ul>
       </div>
     </div>
