@@ -19,10 +19,10 @@ var nombre_ventana_modal2 = "#myModal2"; // id
                 success:function(response)
                 {
                     if(response.statusa=="True"){
-                        alert("agregado!");
+                        //alert("agregado!");
                         var idProd = response.product_id2;
                         $('#tr'+idProd).append();
-                        
+
                         var cantidad = $("#cant").text();
                         cantid = parseInt(cantidad) + 1;
                         $('#cant').text(cantid);
