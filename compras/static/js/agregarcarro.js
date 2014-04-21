@@ -19,13 +19,27 @@ var nombre_ventana_modal2 = "#myModal2"; // id
                 success:function(response)
                 {
                     if(response.statusa=="True"){
-                        //alert("agregado!");
-                        var idProd = response.product_id2;
-                        $('#tr'+idProd).append();
 
                         var cantidad = $("#cant").text();
                         cantid = parseInt(cantidad) + 1;
                         $('#cant').text(cantid);
+
+                        //alert("agregado!");
+                        var idProd = response.product_id2;
+                        //$('#tr'+idProd).append();
+                        var namep = response.nombrep;
+
+        var $ulLista;
+        //si la lista html no existe entonces la agregamos al dom
+        if(!$('#divLista').find('ul').length) $('#divLista').append('<ul/>');
+        //obtenemos una instancia de la lista
+        $ulLista=$('#divLista').find('ul');
+        var $liNuevoNombre=$('<li/>').html(cantid + "&nbsp;" + namep);
+        $ulLista.append($liNuevoNombre);
+
+
+
+
 
                         $(nombre_ventana_modal2).modal('hide');
                     }else{

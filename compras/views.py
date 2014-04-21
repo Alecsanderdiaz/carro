@@ -49,8 +49,8 @@ def home(request):
 				print(i)
 				a=unicode(id_producto)
 				llaves.append(a)
-			p = get_object_or_404(Producto, pk=1)
-			mensajea = {"statusa":"True","product_id2":p.id}
+			p = get_object_or_404(Producto, pk=id_producto)
+			mensajea = {"statusa":"True","product_id2":p.id, "nombrep":p.nombre}
 			print(mensajea)
 			request.session["llavesp"] = llaves
 			return HttpResponse(simplejson.dumps(mensajea),content_type='application/json')
