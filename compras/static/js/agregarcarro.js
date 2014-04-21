@@ -28,14 +28,15 @@ var nombre_ventana_modal2 = "#myModal2"; // id
                         var idProd = response.product_id2;
                         //$('#tr'+idProd).append();
                         var namep = response.nombrep;
+                        var repe = response.rep;
 
         var $ulLista;
         //si la lista html no existe entonces la agregamos al dom
-        if(!$('#divLista').find('ul').length) $('#divLista').append('<ul/>');
+        if(!$('#mario').find('ul').length) $('#mario').append('<ul/>');
         //obtenemos una instancia de la lista
         $ulLista=$('#divLista').find('ul');
-        var $liNuevoNombre=$('<li/>').html(cantid + "&nbsp;" + namep);
-        $ulLista.append($liNuevoNombre);
+        var $liNuevoNombre=$('<li/>').html("&nbsp;"+"&nbsp;"+repe+"&nbsp;"+"|"+"&nbsp;"+namep);
+        $("#luigi").prepend($liNuevoNombre);
 
 
 
