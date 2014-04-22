@@ -15,7 +15,7 @@
         <form method="post" id="frmAgregar">
             {% csrf_token %}
             <input type="hidden" id="modal_idProducto2" name="product_id2">
-            <input  id="pcantidad" name="cantidad" value="1">
+            <input  id="pcantidad" name="cantidad">
             
             <button type="submit" class="btn btn-danger" id="{{p.id}}">Si</button>
         </form>
