@@ -6,27 +6,60 @@ import json as simplejson
 
 def cart(request):
 	llaves = request.session["llavesp"]
-
 	if request.method=="POST":
-		print("si hay metodo post")
-		print("el producto esta en request post")
 		try:
 			print("entro al try")
 			id_producto = request.POST['product_id2']
 			cant = request.POST['cantidad']
-			print("#################################################################")
-			print(request.POST)
-			print("#################################################################")
-			#print(id_producto1)
 			veces = int(cant)
-			print(veces)
-			for i in range(veces):
-				print("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
-				print(i)
-				a=unicode(id_producto)
-				llaves.append(a)
-			p = get_object_or_404(Producto, pk=1)
-			mensajea = {"statusa":"True","product_id2":p.id}
+			print("#################################################################")
+			print("#################################################################")
+			print("#################################################################")
+			print(llaves)
+			a =unicode(id_producto)
+			print("#########################count###################################")
+			ji = llaves.count(a)
+			print(ji)
+			pu=veces-ji
+			print("#########################pu######################################")
+			print(pu)
+
+			if pu > 0:
+				for i in range(pu):
+					llaves.append(a)
+			print("#################################################################")
+			print(llaves)
+
+			if pu < 0:
+				pua = abs(pu)
+				for i in range(pua):
+					llaves.remove(a)
+
+			if pu == 0:
+				pass
+
+
+			# if a in llaves:
+			# 	for q in llaves:
+			# 		llaves.remove(a)
+			# print("#################################################################")
+			# print(llaves)
+
+
+
+			# a =set(llaves)
+			# print("############################SET##################################")
+			# print(a)
+
+			# canti=[]
+			# for k in a:
+			# 	h=llaves.count(k)
+			# 	canti.append(h)
+			# print("############################CANTI################################")
+			# print(canti)
+
+			p = get_object_or_404(Producto, pk=id_producto)
+			mensajea = {"statusa":"True","product_id2":p.id, "nombrep":p.nombre, "rep":veces,}
 			print(mensajea)
 			request.session["llavesp"] = llaves
 			return HttpResponse(simplejson.dumps(mensajea),content_type='application/json')

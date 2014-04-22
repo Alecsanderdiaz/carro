@@ -23,8 +23,50 @@
         padding: 9px 0;
       }
     </style>
+
 </head>
 <body>
+
+<!--Modal modificar-->
+ <div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-header">
+    <h3 id="myModalLabel2">Agregar Producto al Carro</h3>
+    </div>
+    <div class="modal-body">
+    <p>¿Realmente desea agregar el producto <span id="modal_name2"></span> al carrito?</p>
+    </div>
+    <div class="modal-footer">
+        <form method="post" id="frmAgregar">
+            {% csrf_token %}
+            <input type="hidden" id="modal_idProducto2" name="product_id2">
+            <input  id="pcantidad" name="cantidad" value="1">
+            
+            <button type="submit" class="btn btn-danger" id="{{p.id}}">Si</button>
+        </form>
+    </div>
+</div>
+<!--EndModal-->
+
+
+<!--Modal Eliminar-->
+<!--  <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+    <h3 id="myModalLabel">Eliminar Producto</h3>
+    </div>
+    <div class="modal-body">
+    <p>¿Deseas eliminar  el producto <span id="modal_name"></span> del carrito?</p>
+    </div>
+    <div class="modal-footer">
+        <form method="post" id="frmEliminar">
+            {% csrf_token %}
+            <input type="hidden" id="modal_idProducto" name="product_id">
+            <input type="hidden" id="pcantidad" name="cantidad" value="0">
+            <button type="submit" class="btn btn-danger">Aceptar</button>
+        </form>
+    </div>
+</div> -->
+<!--EndModal-->
+
 
 
     <div class="navbar navbar-inverse navbar-fixed-top">

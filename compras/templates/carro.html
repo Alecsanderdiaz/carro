@@ -9,18 +9,19 @@
     <h3 id="myModalLabel">Eliminar Producto</h3>
     </div>
     <div class="modal-body">
-    <p>¿Realmente desea eliminar el producto <span id="modal_name"></span>?</p>
+    <p>¿Deseas eliminar  el producto <span id="modal_name"></span> del carrito?</p>
     </div>
     <div class="modal-footer">
         <form method="post" id="frmEliminar">
             {% csrf_token %}
             <input type="hidden" id="modal_idProducto" name="product_id">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
-            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <input type="hidden" id="pcantidade" name="cantidade" value="0">
+            <button type="submit" class="btn btn-danger">Aceptar</button>
         </form>
     </div>
 </div>
 <!--EndModal-->
+
 
 
 {% if zk %}
@@ -46,8 +47,9 @@
 
 
             <td> {{q}} </td>
+<!--             <td><a href="#myModal2" role="button" class="btn btn-danger agregue" data-toggle="modal" id="{{p.id}}" data-name="{{p.nombre}}"><i class="icon-shopping-cart"></i>Change</a></td> -->
             <td>{{p.nombre}}</td>
-            <td><a href="#myModal" role="button" class="btn btn-danger delete" data-toggle="modal" id="{{p.id}}" data-name="{{p.nombre}}"><i class="icon-trash icon-white"></i>Reste1</a></td>
+            <td><a href="#myModal" role="button" class="btn btn-danger delete" data-toggle="modal" id="{{p.id}}" data-name="{{p.nombre}}"><i class="icon-shopping-cart"></i>Elminar</a></td>
             
 <!--             <td>       
                 <form method="post" id="frmEliminar">
