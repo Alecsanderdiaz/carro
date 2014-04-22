@@ -8,7 +8,7 @@ def cart(request):
 	llaves = request.session["llavesp"]
 	if request.method=="POST":
 		try:
-			print("entro al try")
+			print("context###############entro al try")
 			id_producto = request.POST['product_id2']
 			cant = request.POST['cantidad']
 			veces = int(cant)
@@ -67,10 +67,12 @@ def cart(request):
 			mensaje = {"statusa":"False"}
 			return HttpResponse(simplejson.dumps(mensajea),content_type='application/json')
 		print("el producto NOOOOOOOOOOOOOOOOOOO esta en request post")
+
 	li = []
 	for i in request.session["llavesp"]:
 		e = get_object_or_404(Producto, pk=i)
 		li.append(e)
+		
 	a =set(llaves)
 	print("set---------------------aaaaaaaaaaaaaaaa")
 	print(a)
