@@ -9,14 +9,16 @@
     <h3 id="myModalLabel">Eliminar Producto</h3>
     </div>
     <div class="modal-body">
-    <p>¿Deseas eliminar  el producto <span id="modal_name"></span> del carrito?</p>
+    <p>¿Realmente desea eliminar el producto <span id="modal_name"></span>?</p>
     </div>
     <div class="modal-footer">
         <form method="post" id="frmEliminar">
             {% csrf_token %}
             <input type="hidden" id="modal_idProducto" name="product_id">
-            <input type="hidden" id="pcantidade" name="cantidade" value="0">
-            <button type="submit" class="btn btn-danger">Aceptar</button>
+
+            <input type="hidden" id="pcantidad" name="cantidade" value="0">
+            
+            <button type="submit" class="btn btn-danger" id="{{p.id}}">Si</button>
         </form>
     </div>
 </div>
@@ -30,6 +32,7 @@
         <tr>
             <th>Cantidad</th>
             <th>Producto</th>
+            <th>Elliminar</th>
             <th>Elliminar</th>
             
         </tr>
@@ -54,9 +57,9 @@
 
             <td>{{p.nombre}}</td>
 
-<!--             <td>
-                <a href="#myModal" role="button" class="btn btn-danger delete" data-toggle="modal" id="{{p.id}}"   data-name="{{p.nombre}}"><i class="icon-shopping-cart"></i>Elminar</a>
-            </td> -->
+            <td>
+                <a href="#myModal" role="button" class="btn btn-danger delete" data-toggle="modal" id="{{p.id}}"   data-name="{{p.nombre}}"><i class="icon-remove"></i>Elminar</a>
+            </td>
             
 
 

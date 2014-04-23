@@ -10,7 +10,9 @@ def cart(request):
 		try:
 			print("context###############entro al try")
 			id_producto = request.POST['product_id2']
+			print(id_producto)
 			cant = request.POST['cantidad']
+			print(cant)
 			veces = int(cant)
 			print("#################################################################")
 			print("#################################################################")
@@ -28,10 +30,11 @@ def cart(request):
 				for i in range(pu):
 					llaves.append(a)
 			print("#################################################################")
-			print(llaves)
+			#print(llaves)
 
 			if pu < 0:
 				pua = abs(pu)
+				print(pua)
 				for i in range(pua):
 					llaves.remove(a)
 
@@ -72,7 +75,7 @@ def cart(request):
 	for i in request.session["llavesp"]:
 		e = get_object_or_404(Producto, pk=i)
 		li.append(e)
-		
+
 	a =set(llaves)
 	print("set---------------------aaaaaaaaaaaaaaaa")
 	print(a)

@@ -86,47 +86,118 @@ def carro(request):
 
 	llaves = request.session["llavesp"]
 
-	# if request.method=="POST":
-	# 	try:
-	# 		print("vcarro###############################entro al try")
-	# 		id_producto = request.POST['product_id2']
-	# 		cantida = request.POST['cantidad']
-	# 		print("---------------------------------------id_producto")
-	# 		print(id_producto)
-	# 		print("---------------------------------------cantida")
-	# 		print(cantida)
-	# 		#llaves = request.session["llavesp"]
-	# 		print("---------------------------------------llaves")
-	# 		print(request.session["llavesp"])
-	# 		a=unicode(id_producto)
-	# 		print("---------------------------------------a")
-	# 		print(a)
-	# 		jo = llaves.count(a)
-	# 		for i in range(jo):
-	# 			llaves.remove(a)
-	# 		print("---------------------------------------llavesremove")
-	# 		print(request.session["llavesp"])
-	# 		print("---------------------------------------u'id_producto'")
-	# 		print(id_producto)
+	if request.method=="POST":
+		print("hay request en la vista carro")
+		if "product_id2" in request.POST:
+			print("hay un producto product_id2")
+			try:
+				print("vindex#####################ntro al try")
+				id_producto = request.POST['product_id2']
+				cant = request.POST['cantidad']
+				veces = int(cant)
+				print("#################################################################")
+				print("#################################################################")
+				print("#################################################################")
+				print(llaves)
+				a =unicode(id_producto)
+				print("#########################count###################################")
+				ji = llaves.count(a)
+				print(ji)
+				pu=veces-ji
+				print("#########################pu######################################")
+				print(pu)
 
-	# 		p = get_object_or_404(Producto, pk=id_producto)
-	# 		#p = producto.objects.get(pk=id_producto)
-	# 		#print("---------------------------------------p")
-	# 		print(p)
-	# 		mensaje = {"statuse":"True","product_id2":p.id}
-	# 		print(mensaje)
-	# 		request.session["llavesp"] = llaves
-	# 		#p.delete() # Elinamos objeto de la base de datos
-	# 		print("###############################antes retur del try")
-	# 		print("salio try")
-	# 		return HttpResponse(simplejson.dumps(mensaje),content_type='application/json')
-	# 		#print("salio try")
-	# 	except:
-	# 		print("###############################entro except")
-	# 		mensaje = {"statuse":"False"}
-	# 		print("###############################antes retur del except")
-	# 		return HttpResponse(simplejson.dumps(mensaje),content_type='application/json')
-	# 		print("salio del except")
+				if pu > 0:
+					for i in range(pu):
+						llaves.append(a)
+				print("#################################################################")
+				print(llaves)
+
+				if pu < 0:
+					pua = abs(pu)
+					for i in range(pua):
+						llaves.remove(a)
+
+				if pu == 0:
+					pass
+
+
+				# if a in llaves:
+				# 	for q in llaves:
+				# 		llaves.remove(a)
+				# print("#################################################################")
+				# print(llaves)
+
+
+
+				# a =set(llaves)
+				# print("############################SET##################################")
+				# print(a)
+
+				# canti=[]
+				# for k in a:
+				# 	h=llaves.count(k)
+				# 	canti.append(h)
+				# print("############################CANTI################################")
+				# print(canti)
+
+				p = get_object_or_404(Producto, pk=id_producto)
+				mensajea = {"statusa":"True","product_id2":p.id, "nombrep":p.nombre, "rep":veces,}
+				print(mensajea)
+				request.session["llavesp"] = llaves
+				return HttpResponse(simplejson.dumps(mensajea),content_type='application/json')
+			except:
+				mensaje = {"statusa":"False"}
+				return HttpResponse(simplejson.dumps(mensajea),content_type='application/json')
+
+		else:
+			print("hay un producto product_id")
+			try:
+				print("vcarro###############################entro al try")
+				id_producto = request.POST['product_id']
+				cantida = request.POST['cantidade']
+				print("---------------------------------------id_producto")
+				print(id_producto)
+				print("---------------------------------------cantida")
+				print(cantida)
+				#llaves = request.session["llavesp"]
+				print("---------------------------------------llaves")
+				#print(request.session["llavesp"])
+				a=unicode(id_producto)
+				print("---------------------------------------a")
+				print(a)
+				jo = llaves.count(a)
+				for i in range(jo):
+					llaves.remove(a)
+				print("---------------------------------------llavesremove")
+				#print(request.session["llavesp"])
+				print("---------------------------------------u'id_producto'")
+				print(id_producto)
+
+				p = get_object_or_404(Producto, pk=id_producto)
+				#p = producto.objects.get(pk=id_producto)
+				#print("---------------------------------------p")
+				print(p)
+				mensaje = {"statuse":"True","product_id2":p.id}
+				print(mensaje)
+				request.session["llavesp"] = llaves
+				#p.delete() # Elinamos objeto de la base de datos
+				print("###############################antes retur del try")
+				print("salio try")
+				return HttpResponse(simplejson.dumps(mensaje),content_type='application/json')
+				#print("salio try")
+			except:
+				print("###############################entro except")
+				mensaje = {"statuse":"False"}
+				print("###############################antes retur del except")
+				return HttpResponse(simplejson.dumps(mensaje),content_type='application/json')
+				print("salio del except")
+
+
+
+
+
+
 	
 	li = []
 	for i in request.session["llavesp"]:

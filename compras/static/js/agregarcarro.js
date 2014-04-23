@@ -26,8 +26,8 @@ var nombre_ventana_modal2 = "#myModal2"; // id
 
                         //alert("agregado!");
                         var idProd = response.product_id2;
-                        $('#tr'+idProd).remove();
-                        //$('#tr'+idProd).append();
+                        //$('#tr'+idProd).remove();
+                        $('#tr'+idProd).append();
                         var namep = response.nombrep;
                         var repe = response.rep;
 
