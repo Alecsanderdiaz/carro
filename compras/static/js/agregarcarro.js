@@ -24,14 +24,27 @@ var nombre_ventana_modal2 = "#myModal2"; // id
                         cantid = parseInt(cantidad) + 1;
                         $('#cant').text(cantid);
 
-                        //alert("agregado!");
-                        var idProd = response.product_id2;
-                        //var row = '#tr'+idProd;
-                        //$('#tr'+idProd).remove();
-
                         var namep = response.nombrep;
                         var repe = response.rep;
 
+                        //alert("agregado!");
+                        var idProd = response.product_id2;
+                        //var row = '#tr'+idProd;
+                        var amen = '#tr'+idProd;
+                        //alert(amen);
+                        $(amen).find("td:first").text(repe);
+
+    
+//First, obtain the td that contains 'Value2'
+// var $tdThatContainsMora = $("#tabla_productos tr td").filter(function(){
+//     return $(this).html() == "Mora";
+// });
+// //Then, obtain the first td in its row (it's first 'sibling');
+// $firstCellOfMorarow = $tdThatContainsMora.siblings("td").eq(0);
+// alert($firstCellOfMorarow.html()); 
+
+//$('#tabla_productos tr:nth-child(2) td:nth-child(1)').html('foo');
+//$($('#tabla_productos').find('tbody>tr')[1]).children('td')[1].innerHTML = texto a cambiar;
                         //$(nombre_tabla2).append('<tr><td>"repe"</td><td></td><td>namep</td><td></td></tr>');
 // var table = document.getElementById(tabla_productos);
 // var row = table.insertRow(0);
