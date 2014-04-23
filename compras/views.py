@@ -19,7 +19,7 @@ def home(request):
 			print("#################################################################")
 			print("#################################################################")
 			print("#################################################################")
-			print(llaves)
+			#print(llaves)
 			a =unicode(id_producto)
 			print("#########################count###################################")
 			ji = llaves.count(a)
@@ -31,8 +31,8 @@ def home(request):
 			if pu > 0:
 				for i in range(pu):
 					llaves.append(a)
-			print("#################################################################")
-			print(llaves)
+			#print("#################################################################")
+			#print(llaves)
 
 			if pu < 0:
 				pua = abs(pu)
@@ -91,14 +91,14 @@ def carro(request):
 		if "product_id2" in request.POST:
 			print("hay un producto product_id2")
 			try:
-				print("vindex#####################ntro al try")
+				print("vcarro#####################ntro al try")
 				id_producto = request.POST['product_id2']
 				cant = request.POST['cantidad']
 				veces = int(cant)
 				print("#################################################################")
 				print("#################################################################")
 				print("#################################################################")
-				print(llaves)
+				#print(llaves)
 				a =unicode(id_producto)
 				print("#########################count###################################")
 				ji = llaves.count(a)
@@ -111,7 +111,7 @@ def carro(request):
 					for i in range(pu):
 						llaves.append(a)
 				print("#################################################################")
-				print(llaves)
+				#print(llaves)
 
 				if pu < 0:
 					pua = abs(pu)

@@ -26,14 +26,15 @@ var nombre_ventana_modal2 = "#myModal2"; // id
 
                         //alert("agregado!");
                         var idProd = response.product_id2;
+                        //var row = '#tr'+idProd;
                         //$('#tr'+idProd).remove();
 
                         var namep = response.nombrep;
                         var repe = response.rep;
 
                         //$(nombre_tabla2).append('<tr><td>"repe"</td><td></td><td>namep</td><td></td></tr>');
-// var table = document.getElementById("tabla_productos");
-//                         var row = table.insertRow(idProd);
+// var table = document.getElementById(tabla_productos);
+// var row = table.insertRow(0);
 // var cell1 = row.insertCell(0);
 // var cell2 = row.insertCell(1);
 // var cell3 = row.insertCell(2);
