@@ -178,7 +178,7 @@ def carro(request):
 				#p = producto.objects.get(pk=id_producto)
 				#print("---------------------------------------p")
 				print(p)
-				mensaje = {"statuse":"True","product_id2":p.id}
+				mensaje = {"statuse":"True","product_id":p.id}
 				print(mensaje)
 				request.session["llavesp"] = llaves
 				#p.delete() # Elinamos objeto de la base de datos
