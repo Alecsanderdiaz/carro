@@ -144,6 +144,7 @@ def carro(request):
 				p = get_object_or_404(Producto, pk=id_producto)
 				mensajea = {"statusa":"True","product_id2":p.id, "nombrep":p.nombre, "rep":veces,}
 				print(mensajea)
+				print(llaves)
 				request.session["llavesp"] = llaves
 				return HttpResponse(simplejson.dumps(mensajea),content_type='application/json')
 			except:
