@@ -2,17 +2,17 @@
 // Configuraciones Generales
 var nombre_tabla2 = "#tabla_productos"; // id
 var nombre_boton_agregue = ".agregue"; // Clase
-var nombre_formulario_modal2 = "#frmAgregar"; //id
+var nombre_formulario_modal2 = ".frmAgregar"; //id
 var nombre_ventana_modal2 = "#myModal2"; // id
 // Fin de configuraciones
 
-    $(document).on('ready',function(){
-        $(nombre_boton_agregue).on('click',function(e){
+    //$(document).on('ready',function(){
+        $(nombre_formulario_modal2).submit(function(e){
             e.preventDefault();
-            var Pid = $(this).attr('id');
-            var name = $(this).data('name');
-            $('#modal_idProducto2').val(Pid);
-            $('#modal_name2').text(name);
+            // var Pid = $(this).attr('id');
+            // var name = $(this).data('name');
+            // $('#modal_idProducto2').val(Pid);
+            // $('#modal_name2').text(name);
         });
 
         var options = {
@@ -78,4 +78,4 @@ var nombre_ventana_modal2 = "#myModal2"; // id
             };
 
         $(nombre_formulario_modal2).ajaxForm(options);
-    });
+    //});

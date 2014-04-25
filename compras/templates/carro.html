@@ -4,7 +4,7 @@
 
 
 <!--Modal Eliminar-->
- <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!--  <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
     <h3 id="myModalLabel">Eliminar Producto</h3>
     </div>
@@ -21,7 +21,7 @@
             <button type="submit" class="btn btn-danger" id="{{p.id}}">Si</button>
         </form>
     </div>
-</div>
+</div> -->
 <!--EndModal-->
 
 
@@ -31,9 +31,9 @@
     <thead>
         <tr>
             <th>Cantidad</th>
-            <th>Editar</th>
+            <th>F. Editar</th>
             <th>Producto</th>
-            <th>Eliminar</th>
+            <th>F. Eliminar</th>
             
         </tr>
     </thead>
@@ -51,16 +51,35 @@
 
             <td> {{q}} </td>
 
-            <td>
-                <a href="#myModal2" role="button" class="btn btn-danger agregue" data-toggle="modal" id="{{p.id}}" data-name="{{p.nombre}}"><i class="icon-pencil"></i></a>
+            <td>       
+                <form method="post" class="frmAgregar">
+                    {% csrf_token %}
+                    <input type="hidden" id="modal_idProducto2" name="product_id2" value="{{p.id}}">
+                    <input  id="pcantidad" name="cantidad">
+                    <button type="submit" class="btn btn-danger"><i class="icon-pencil"></i></button>
+                </form>
             </td>
+
+
+<!--             <td>
+                <a href="#myModal2" role="button" class="btn btn-danger agregue" data-toggle="modal" id="{{p.id}}" data-name="{{p.nombre}}"><i class="icon-pencil"></i></a>
+            </td> -->
 
             <td>{{p.nombre}}</td>
 
-            <td>
+<!--             <td>
                 <a href="#myModal" role="button" class="btn btn-danger delete" data-toggle="modal" id="{{p.id}}"   data-name="{{p.nombre}}"><i class="icon-remove"></i></a>
-            </td>
+            </td> -->
+<td>
+        <form method="post" class="frmEliminar">
+            {% csrf_token %}
+            <input type="hidden" id="modal_idProducto" name="product_id" value="{{p.id}}">
+
+            <input type="hidden" id="pcantidad" name="cantidade" value="0">
             
+            <button type="submit" class="btn btn-danger" id="{{p.id}}"><i class="icon-remove"></i></button>
+        </form>
+</td>            
 
 
 
