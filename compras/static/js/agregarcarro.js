@@ -32,6 +32,11 @@ var nombre_ventana_modal2 = "#myModal2"; // id
                         var idProd = response.product_id2;
                         //var row = '#tr'+idProd;
                         var amen = '#tr'+idProd;
+                        var bas = '#trr'+idProd;
+
+                       // $('#tabase > tbody:last').append('<tr id="bas"><td></td><td>bas</td></tr>');
+                        //$("#bas").find("td:first").text(repe);
+                        //$("#bas").find("td:last").text(namep);
                         //alert(amen);
                         $(amen).find("td:first").text(repe);
                         $(amen).find("td:last").text(preciott);
@@ -44,6 +49,9 @@ var nombre_ventana_modal2 = "#myModal2"; // id
                         $("#subt").text("Subtotal = "+subto)
                         $("#iva1").text("Iva = "+iva16)
                         $("#tota").text("Total = "+total)
+
+                        var but = response.lo;
+                        $("#cant").text(but)
 
 
     
@@ -69,13 +77,16 @@ var nombre_ventana_modal2 = "#myModal2"; // id
 // cell3.innerHTML = namep;
 // cell4.innerHTML = "NEW CELL2";
 
-        var $ulLista;
-        //si la lista html no existe entonces la agregamos al dom
-        if(!$('#mario').find('ul').length) $('#mario').append('<ul/>');
-        //obtenemos una instancia de la lista
-        $ulLista=$('#mario').find('ul');
-        var $liNuevoNombre=$('<li/>').html("&nbsp;"+"&nbsp;"+repe+"&nbsp;"+"|"+"&nbsp;"+namep);
-        $("#luigi").prepend($liNuevoNombre);
+
+// agregar en la lista boton
+
+        // var $ulLista;
+        // //si la lista html no existe entonces la agregamos al dom
+        // if(!$('#mario').find('ul').length) $('#mario').append('<ul/>');
+        // //obtenemos una instancia de la lista
+        // $ulLista=$('#mario').find('ul');
+        // var $liNuevoNombre=$('<li/>').html("&nbsp;"+"&nbsp;"+repe+"&nbsp;"+"|"+"&nbsp;"+namep);
+        // $("#luigi").prepend($liNuevoNombre);
 
 
 

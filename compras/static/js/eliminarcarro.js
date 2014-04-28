@@ -22,6 +22,7 @@ var nombre_ventana_modal = "#myModal"; // id
                         //alert("Eliminado!");
                         var idProd = response.product_id;
                             $('#tr'+idProd).remove();
+                            $('#trr'+idProd).remove();
                             //alert('#tr'+idProd)
                             $(nombre_ventana_modal).modal('hide');
 
@@ -34,6 +35,10 @@ var nombre_ventana_modal = "#myModal"; // id
                         $("#subt").text("Subtotal = "+subto)
                         $("#iva1").text("Iva = "+iva16)
                         $("#tota").text("Total = "+total)
+
+
+                        var but = response.lo;
+                        $("#cant").text(but)
                         //
                     }else{
                         //alert("Hubo un error al eliminar!");

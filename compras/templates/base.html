@@ -84,14 +84,44 @@
                 
                   <ul class="dropdown-menu" role="menu" id="luigi">
                     {% if zk %}
+
+                            <table id="tabase">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>C</th>
+                                </tr>
+                              </thead>
+
                       {% for p in zk %}
                         {% for q in canti %}
                           {% if forloop.counter == forloop.parentloop.counter %}
-                            <li>&nbsp;&nbsp;{{q}} | {{p.nombre}}</li>
+
+                              <tbody>
+                                <tr id="trr{{p.id}}">
+                                  <td>{{q}}</td>
+                                  <td>{{p.nombre}}</td>
+
+<td>
+        <form method="post" class="frmEliminar">
+            {% csrf_token %}
+            <input type="hidden" id="modal_idProducto" name="product_id" value="{{p.id}}">
+
+            <input type="hidden" id="pcantidad" name="cantidade" value="0">
+            
+            <button type="submit" class="btn btn-danger" id="{{p.id}}"><i class="icon-remove"></i></button>
+        </form>
+</td> 
+
+
+                                </tr>
+                              </tbody>
+                            
                           {% endif %}
                           {% endfor %}
                         {% endfor %}
                       {% endif %} 
+                      </table>
                     <li class="divider"></li>
                     <li><a href="/inicio/carro">Mi Carro</a></li>
                   </ul>
