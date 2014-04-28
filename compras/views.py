@@ -218,17 +218,29 @@ def carro(request):
 	print(canti)
 
 
-
+	precios = []
 	zk = []
 	for i in a:
 		e = get_object_or_404(Producto, pk=i)
 		zk.append(e)
+		pr = e.precio
+		precios.append(pr)
+
+	xy = [i*j for (i,j) in zip(canti,precios)]
+	print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+	print(xy)
+
+
 
 	print("zk---------------------aaaaaaaaaaaaaaaa")
 	print(zk)
 
+	suma = sum(xy)
+	st = int(suma/1.16)
+	iv = int(suma-st)
 
-	return render(request, 'carro.html',{'canti':canti,'zk':zk})
+
+	return render(request, 'carro.html',{'canti':canti,'zk':zk,'xy':xy,'suma':suma,'st':st,'iv':iv})
 
 
 def alcarrito(request, p_id):

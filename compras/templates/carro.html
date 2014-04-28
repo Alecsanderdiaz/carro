@@ -34,6 +34,8 @@
             <th>F. Editar</th>
             <th>Producto</th>
             <th>F. Eliminar</th>
+            <th>Precio U</th>
+            <th>Precio C</th>
             
         </tr>
     </thead>
@@ -41,6 +43,9 @@
 
 {% for p in zk %}
   {% for q in canti %}
+   
+    {% if forloop.counter == forloop.parentloop.counter %}
+     {% for j in xy %}
     {% if forloop.counter == forloop.parentloop.counter %}
 
 
@@ -55,7 +60,7 @@
                 <form method="post" class="frmAgregar">
                     {% csrf_token %}
                     <input type="hidden" id="modal_idProducto2" name="product_id2" value="{{p.id}}">
-                    <input  id="pcantidad" name="cantidad" value="{{q}}">
+                    <input  id="pcantidad" name="cantidad" value="{{q}}" maxlength="3" size="3">
                     <button type="submit" class="btn btn-danger"><i class="icon-pencil"></i></button>
                 </form>
             </td>
@@ -83,9 +88,9 @@
 
 
 
+<td>{{p.precio}}</td>
 
-
-
+ <td> {{j}} </td>
 <!--             <td>       
                 <form method="post" id="frmEliminar">
                     {% csrf_token %}
@@ -100,9 +105,23 @@
         </tr>
     </tbody>
     {% endif %}
-  {% endfor %}
+      {% endfor %}
+     {% endif %}
+    
+    
+    
+
+
+    {% endfor %}
 {% endfor %}
    </table>
+
+   <ul>
+    <li>Subtotal = {{st}}</li>
+    <li>Iva = {{iv}}</li>
+    <li>Total = {{suma}}</li>
+
+   </ul>
 
 
 {% else %}
