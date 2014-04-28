@@ -75,6 +75,8 @@
 <!--             <td>
                 <a href="#myModal" role="button" class="btn btn-danger delete" data-toggle="modal" id="{{p.id}}"   data-name="{{p.nombre}}"><i class="icon-remove"></i></a>
             </td> -->
+
+            
 <td>
         <form method="post" class="frmEliminar">
             {% csrf_token %}
@@ -85,7 +87,8 @@
             <button type="submit" class="btn btn-danger" id="{{p.id}}"><i class="icon-remove"></i></button>
         </form>
 </td>            
-
+        
+        
 
 
 <td>{{p.precio}}</td>
@@ -115,14 +118,14 @@
     {% endfor %}
 {% endfor %}
    </table>
-
+<div >
    <ul>
-    <li>Subtotal = {{st}}</li>
-    <li>Iva = {{iv}}</li>
-    <li>Total = {{suma}}</li>
+    <li id = "subt">Subtotal = {{st}}</li>
+    <li id = "iva1">Iva = {{iv}}</li>
+    <li id = "tota">Total = {{suma}}</li>
 
    </ul>
-
+</div>
 
 {% else %}
 <h2>No hay productos en tu carrito :( </h2>

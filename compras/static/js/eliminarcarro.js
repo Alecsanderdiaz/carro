@@ -25,7 +25,16 @@ var nombre_ventana_modal = "#myModal"; // id
                             //alert('#tr'+idProd)
                             $(nombre_ventana_modal).modal('hide');
 
-                        
+
+                            //
+                        var subto = response.st;
+                        var iva16 = response.iv;
+                        var total = response.suma
+
+                        $("#subt").text("Subtotal = "+subto)
+                        $("#iva1").text("Iva = "+iva16)
+                        $("#tota").text("Total = "+total)
+                        //
                     }else{
                         //alert("Hubo un error al eliminar!");
                         $(nombre_ventana_modal).modal('hide');

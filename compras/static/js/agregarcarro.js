@@ -26,6 +26,7 @@ var nombre_ventana_modal2 = "#myModal2"; // id
 
                         var namep = response.nombrep;
                         var repe = response.rep;
+                        var preciott = response.preciot;
 
                         //alert("agregado!");
                         var idProd = response.product_id2;
@@ -33,6 +34,17 @@ var nombre_ventana_modal2 = "#myModal2"; // id
                         var amen = '#tr'+idProd;
                         //alert(amen);
                         $(amen).find("td:first").text(repe);
+                        $(amen).find("td:last").text(preciott);
+
+
+                        var subto = response.st;
+                        var iva16 = response.iv;
+                        var total = response.suma
+
+                        $("#subt").text("Subtotal = "+subto)
+                        $("#iva1").text("Iva = "+iva16)
+                        $("#tota").text("Total = "+total)
+
 
     
 //First, obtain the td that contains 'Value2'
@@ -61,7 +73,7 @@ var nombre_ventana_modal2 = "#myModal2"; // id
         //si la lista html no existe entonces la agregamos al dom
         if(!$('#mario').find('ul').length) $('#mario').append('<ul/>');
         //obtenemos una instancia de la lista
-        $ulLista=$('#divLista').find('ul');
+        $ulLista=$('#mario').find('ul');
         var $liNuevoNombre=$('<li/>').html("&nbsp;"+"&nbsp;"+repe+"&nbsp;"+"|"+"&nbsp;"+namep);
         $("#luigi").prepend($liNuevoNombre);
 

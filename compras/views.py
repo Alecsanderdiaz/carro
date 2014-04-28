@@ -141,11 +141,62 @@ def carro(request):
 				# print("############################CANTI################################")
 				# print(canti)
 
+#
+
 				p = get_object_or_404(Producto, pk=id_producto)
-				mensajea = {"statusa":"True","product_id2":p.id, "nombrep":p.nombre, "rep":veces,}
-				print(mensajea)
+				precio1 = p.precio
+				preciot = precio1*veces
+
 				print(llaves)
 				request.session["llavesp"] = llaves
+
+#
+				li = []
+				for i in request.session["llavesp"]:
+					e = get_object_or_404(Producto, pk=i)
+					li.append(e)
+
+
+				a =set(llaves)
+				print("set---------------------aaaaaaaaaaaaaaaa")
+				print(a)
+
+				canti=[]
+				for k in a:
+					h=llaves.count(k)
+					canti.append(h)
+				print("canti--------------------aaaaaaaaaaaaaaaa")
+				print(canti)
+
+
+				precios = []
+				zk = []
+				for i in a:
+					e = get_object_or_404(Producto, pk=i)
+					zk.append(e)
+					pr = e.precio
+					precios.append(pr)
+
+				xy = [i*j for (i,j) in zip(canti,precios)]
+				print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+				print(xy)
+
+
+
+				print("zk---------------------aaaaaaaaaaaaaaaa")
+				print(zk)
+
+				suma = sum(xy)
+				st = int(suma/1.16)
+				iv = int(suma-st)
+
+#
+
+				mensajea = {"statusa":"True","product_id2":p.id, "nombrep":p.nombre, "rep":veces, "preciot":preciot, "suma":suma,"st":st,"iv":iv}
+				print(mensajea)
+
+
+#
 				return HttpResponse(simplejson.dumps(mensajea),content_type='application/json')
 			except:
 				mensaje = {"statusa":"False"}
@@ -174,17 +225,71 @@ def carro(request):
 				#print(request.session["llavesp"])
 				print("---------------------------------------u'id_producto'")
 				print(id_producto)
-
+##
+				
 				p = get_object_or_404(Producto, pk=id_producto)
-				#p = producto.objects.get(pk=id_producto)
-				#print("---------------------------------------p")
-				print(p)
-				mensaje = {"statuse":"True","product_id":p.id}
-				print(mensaje)
+
+
+				print(llaves)
 				request.session["llavesp"] = llaves
-				#p.delete() # Elinamos objeto de la base de datos
+
+#
+				li = []
+				for i in request.session["llavesp"]:
+					e = get_object_or_404(Producto, pk=i)
+					li.append(e)
+
+
+				a =set(llaves)
+				print("set---------------------aaaaaaaaaaaaaaaa")
+				print(a)
+
+				canti=[]
+				for k in a:
+					h=llaves.count(k)
+					canti.append(h)
+				print("canti--------------------aaaaaaaaaaaaaaaa")
+				print(canti)
+
+
+				precios = []
+				zk = []
+				for i in a:
+					e = get_object_or_404(Producto, pk=i)
+					zk.append(e)
+					pr = e.precio
+					precios.append(pr)
+
+				xy = [i*j for (i,j) in zip(canti,precios)]
+				print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+				print(xy)
+
+
+
+				print("zk---------------------aaaaaaaaaaaaaaaa")
+				print(zk)
+
+				suma = sum(xy)
+				print(suma)
+				st = int(suma/1.16)
+				print(st)
+				iv = int(suma-st)
+				print(iv)
+
+#
+
+				mensaje = {"statuse":"True","product_id":p.id, "suma":suma,"st":st,"iv":iv}
+				print(mensaje)
+
+
+##
+
+				##p = get_object_or_404(Producto, pk=id_producto)
+
+				##mensaje = {"statuse":"True","product_id":p.id}
+
 				print("###############################antes retur del try")
-				print("salio try")
+
 				return HttpResponse(simplejson.dumps(mensaje),content_type='application/json')
 				#print("salio try")
 			except:
