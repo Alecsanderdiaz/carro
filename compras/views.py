@@ -13,7 +13,7 @@ def home(request):
 	if request.method=="POST":
 		if "product_id2" in request.POST:
 			try:
-				print("vindex#####################ntro al try")
+				print("#################-MODIFICAR-HOME-##################################")
 				id_producto = request.POST['product_id2']
 				cant = request.POST['cantidad']
 				veces = int(cant)
@@ -78,7 +78,7 @@ def home(request):
 		else:
 			print("hay un producto product_id")
 			try:
-				print("vcarro###############################entro al try")
+				print("#################-ELIMINAR-HOME-##################################")
 				id_producto = request.POST['product_id']
 				cantida = request.POST['cantidade']
 				print("---------------------------------------id_producto")
@@ -194,7 +194,7 @@ def carro(request):
 		if "product_id2" in request.POST:
 			print("hay un producto product_id2")
 			try:
-				print("vcarro#####################ntro al try")
+				print("#################-MODIFICAR-CARRO-##################################")
 				id_producto = request.POST['product_id2']
 				cant = request.POST['cantidad']
 				veces = int(cant)
@@ -310,7 +310,7 @@ def carro(request):
 		else:
 			print("hay un producto product_id")
 			try:
-				print("vcarro###############################entro al try")
+				print("#################-ELIMINAR-CARRO-##################################")
 				id_producto = request.POST['product_id']
 				cantida = request.POST['cantidade']
 				print("---------------------------------------id_producto")

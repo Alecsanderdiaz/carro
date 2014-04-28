@@ -41,6 +41,9 @@ var nombre_ventana_modal2 = "#myModal2"; // id
                         $(amen).find("td:first").text(repe);
                         $(amen).find("td:last").text(preciott);
 
+                        $(bas).find("td:first").text(repe);
+                        //$(amen).find("td:last").text(preciott);
+
 
                         var subto = response.st;
                         var iva16 = response.iv;

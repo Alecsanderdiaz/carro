@@ -78,7 +78,7 @@ def cart(request):
 		if "product_id2" in request.POST:
 			print("hay un producto product_id2")
 			try:
-				print("vcarro#####################ntro al try")
+				print("#################-MODIFICAR-CONTEXT-##################################")
 				id_producto = request.POST['product_id2']
 				cant = request.POST['cantidad']
 				veces = int(cant)
@@ -194,7 +194,7 @@ def cart(request):
 		else:
 			print("hay un producto product_id")
 			try:
-				print("contextprocessors###############################entro al try")
+				print("#################-ELIMINAR-CONTEXT-##################################")
 				id_producto = request.POST['product_id']
 				cantida = request.POST['cantidade']
 				print("---------------------------------------id_producto")
