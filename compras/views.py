@@ -65,8 +65,46 @@ def home(request):
 				a =set(llaves)
 				lo = len(a)
 
+				a =set(llaves)
+				print("set---------------------aaaaaaaaaaaaaaaa")
+				print(a)
+
+				canti=[]
+				for k in a:
+					h=llaves.count(k)
+					canti.append(h)
+				print("canti--------------------aaaaaaaaaaaaaaaa")
+				print(canti)
+
+
+				precios = []
+				zk = []
+				for i in a:
+					e = get_object_or_404(Producto, pk=i)
+					zk.append(e)
+					pr = e.precio
+					precios.append(pr)
+
+				xy = [i*j for (i,j) in zip(canti,precios)]
+				print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+				print(xy)
+
+
+
+				print("zk---------------------aaaaaaaaaaaaaaaa")
+				print(zk)
+
+				suma = sum(xy)
+				print(suma)
+				st = int(suma/1.16)
+				print(st)
+				iv = int(suma-st)
+				print(iv)
+
+				lo = len(xy)
+
 				p = get_object_or_404(Producto, pk=id_producto)
-				mensajea = {"statusa":"True","product_id2":p.id, "nombrep":p.nombre, "rep":veces,"lo":lo}
+				mensajea = {"statusa":"True","product_id2":p.id, "nombrep":p.nombre, "rep":veces,"lo":lo, "suma":suma}
 				print(mensajea)
 				request.session["llavesp"] = llaves
 				return HttpResponse(simplejson.dumps(mensajea),content_type='application/json')

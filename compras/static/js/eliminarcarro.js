@@ -37,6 +37,9 @@ var nombre_ventana_modal = "#myModal"; // id
                         $("#tota").text("Total = "+total)
 
 
+                        $("#sumaba").text("Total = "+total)
+
+
                         var but = response.lo;
                         $("#cant").text(but)
                         //

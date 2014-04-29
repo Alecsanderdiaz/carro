@@ -53,6 +53,8 @@ var nombre_ventana_modal2 = "#myModal2"; // id
                         $("#iva1").text("Iva = "+iva16)
                         $("#tota").text("Total = "+total)
 
+                        $("#sumaba").text("Total = "+total)
+
                         var but = response.lo;
                         $("#cant").text(but)
 
