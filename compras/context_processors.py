@@ -5,6 +5,11 @@ from django.http import HttpResponse
 import json as simplejson
 
 def cart(request):
+
+	if "llavesp" in request.session:
+		pass
+	else:
+		request.session["llavesp"] = []
 	llaves = request.session["llavesp"]
 	# if request.method=="POST":
 	# 	try:
@@ -359,6 +364,11 @@ def cart(request):
 
 
 def shopping(request):
+
+	if "llavesp" in request.session:
+		pass
+	else:
+		request.session["llavesp"] = []
 	cosas = request.session["llavesp"]
 	listado=[]
 	precioscompra=[]

@@ -9,6 +9,12 @@ def vaciarcarro(request):
 
 def home(request):
 
+	if "llavesp" in request.session:
+		pass
+	else:
+		request.session["llavesp"] = []
+
+	print("hola2")
 	llaves = request.session["llavesp"]
 	if request.method=="POST":
 		if "product_id2" in request.POST:
@@ -223,6 +229,11 @@ def pagina3(request):
 	return render(request,'pagina3.html')
 
 def carro(request):
+
+	if "llavesp" in request.session:
+		pass
+	else:
+		request.session["llavesp"] = []
 
 
 	llaves = request.session["llavesp"]
@@ -494,6 +505,12 @@ def carro(request):
 
 
 def alcarrito(request, p_id):
+
+	if "llavesp" in request.session:
+		pass
+	else:
+		request.session["llavesp"] = []
+
 	p = get_object_or_404(Producto, pk=p_id)
 	llaves = request.session["llavesp"]
 	llaves.append(p_id)
@@ -503,6 +520,11 @@ def alcarrito(request, p_id):
 	return HttpResponseRedirect("/inicio")
 
 def mandarpedido(request):
+
+	if "llavesp" in request.session:
+		pass
+	else:
+		request.session["llavesp"] = []
 
 	llaves = request.session["llavesp"]
 

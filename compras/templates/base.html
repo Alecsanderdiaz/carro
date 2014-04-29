@@ -92,12 +92,12 @@
                                   <th>C</th>
                                 </tr>
                               </thead>
-
+<tbody>
                       {% for p in zk %}
                         {% for q in canti %}
                           {% if forloop.counter == forloop.parentloop.counter %}
 
-                              <tbody>
+                              
                                 <tr id="trr{{p.id}}">
                                   <td>{{q}}</td>
                                   <td>{{p.nombre}}</td>
@@ -115,13 +115,16 @@
 
 
                                 </tr>
-                              </tbody>
+                              
                             
                           {% endif %}
                           {% endfor %}
                         {% endfor %}
+
+                        </tbody>
+                        </table>
                       {% endif %} 
-                      </table>
+                      
                       <li id="sumaba">Total = {{suma}}</li>
                     <li class="divider"></li>
                     <li><a href="/inicio/carro">Mi Carro</a></li>

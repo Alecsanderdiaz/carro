@@ -33,10 +33,12 @@ var nombre_ventana_modal2 = "#myModal2"; // id
                         //var row = '#tr'+idProd;
                         var amen = '#tr'+idProd;
                         var bas = '#trr'+idProd;
+// Tratando de acomodar el boton
+                        //$('#tabase > tbody:last').append('<tr id=bas ><td></td></tr>');
+                        //$(bas).find("td:first").text(repe);
+                        //$(bas).find("td:second").text(namep);
 
-                       // $('#tabase > tbody:last').append('<tr id="bas"><td></td><td>bas</td></tr>');
-                        //$("#bas").find("td:first").text(repe);
-                        //$("#bas").find("td:last").text(namep);
+// FIN Tratando de acomodar el boton
                         //alert(amen);
                         $(amen).find("td:first").text(repe);
                         $(amen).find("td:last").text(preciott);
