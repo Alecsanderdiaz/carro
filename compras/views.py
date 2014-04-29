@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Producto
+from .models import Producto, Pedido
 from django.http import HttpResponseRedirect, HttpResponse
 import json as simplejson
 
@@ -501,3 +501,24 @@ def alcarrito(request, p_id):
 	request.session["llavesp"] = llaves
 
 	return HttpResponseRedirect("/inicio")
+
+def mandarpedido(request):
+
+	llaves = request.session["llavesp"]
+
+	a =set(llaves)
+	print(a)
+
+	canti=[]
+	for k in a:
+		h=llaves.count(k)
+		canti.append(h)
+	print(canti)
+	for x, y in zip(a, canti):
+		e = get_object_or_404(Producto, pk=x)
+		a = Pedido.objects.create(usuario=request.user,productop=e,cantidad=y)
+
+
+
+
+	return HttpResponseRedirect('/inicio')

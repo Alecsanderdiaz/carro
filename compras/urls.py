@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^alcarrito/(?P<p_id>\d+)/$', 'compras.views.alcarrito', name='alcarrito'),
     url(r'^vaciarcarro/$', 'compras.views.vaciarcarro', name='vaciarcarro'),
     url(r'^labs/mimeteo$', TemplateView.as_view(template_name="mimeteo.html")),
+    url(r'^mandarpedido/$','compras.views.mandarpedido', name='mandarpedido'),
 
 
 
