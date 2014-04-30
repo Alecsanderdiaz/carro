@@ -71,6 +71,10 @@
 
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
+                    {% if user.is_authenticated %}
+              <p class="navbar-text pull-right"><a href="/inicio/cerrar">salir</a></p>
+
+            {% endif %}
         <a class="brand" href="/inicio/"> Inicio </a>
           <ul class="nav">
             <li> <a href="/inicio/carro"> carro </a> </li>
@@ -130,11 +134,50 @@
                     <li><a href="/inicio/carro">Mi Carro</a></li>
                   </ul>
                 
-              </div>
-            
+
           </ul>
+
+    <!-- Ingresar -->
+              <div class="btn-group">
+          {% if user.is_authenticated%}
+
+
+          {%else%}
+              <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">login
+              </button>
+            {%endif%}
+              </div>
+<!--  -->
+
       </div>
     </div>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+
+
+    <form action="{% url 'ingresar' %}" method="POST">{% csrf_token %}
+        <p>Username: <input id="username-field" name="username" type="text" /></p>
+        <p>Contraseña: <input id="password-field" name="password" type="password" /></p>
+        <p><button type="submit">Login</button></p>
+    </form>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin Modal -->
+
+
+
+
 
     <div class="container-fluid">
       <div class="row-fluid">

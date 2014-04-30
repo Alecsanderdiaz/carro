@@ -544,3 +544,32 @@ def mandarpedido(request):
 
 
 	return HttpResponseRedirect('/inicio')
+
+
+
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
+
+
+def ingresar(request):
+	if request.method == 'POST':
+		formulario = AuthenticationForm(request.POST)
+		if formulario.is_valid:
+			usuario = request.POST['username']
+			clave = request.POST['password']
+			acceso = authenticate(username=usuario, password=clave)
+			if acceso is not None:
+				if acceso.is_active:
+					login(request, acceso)
+					return HttpResponseRedirect('/inicio')
+				else:
+					return render(request, 'index.html')
+			else:
+				return render(request,'index.html')
+	else:
+		formulario = AuthenticationForm()
+	return render(request,'ingresar.html',{'formulario':formulario})
+
+def cerrar(request):
+	logout(request)
+	return HttpResponseRedirect('/inicio')

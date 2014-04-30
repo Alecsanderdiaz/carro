@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     url(r'^vaciarcarro/$', 'compras.views.vaciarcarro', name='vaciarcarro'),
     url(r'^labs/mimeteo$', TemplateView.as_view(template_name="mimeteo.html")),
     url(r'^mandarpedido/$','compras.views.mandarpedido', name='mandarpedido'),
+    url(r'^ingresar/$','compras.views.ingresar', name='ingresar'),
+    url(r'^cerrar/$','compras.views.cerrar', name='cerrar'),
 
 
 
