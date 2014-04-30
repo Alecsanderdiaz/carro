@@ -47,8 +47,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
-    #"compras.context_processors.shopping",
-   # "compras.context_processors.cart",
+    "compras.context_processors.shopping",
+    "compras.context_processors.cart",
     #"compras.context_processors.ingre",
 )
 
