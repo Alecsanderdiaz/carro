@@ -6,6 +6,7 @@ from compras.models import Producto, Pedido, Lineapedido
 
 class LineapedidoInline(admin.StackedInline):
     model = Lineapedido
+    extra = 0
 
 
 class PedidoAdmin(admin.ModelAdmin):
