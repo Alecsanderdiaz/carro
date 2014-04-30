@@ -9,14 +9,14 @@ class LineapedidoInline(admin.StackedInline):
 
 
 class PedidoAdmin(admin.ModelAdmin):
-    list_display = ['usuario','fecha']
+    list_display = ['id','usuario','fecha']
     inlines = [LineapedidoInline]
 
 
 
 admin.site.register(Producto)
 admin.site.register(Pedido,PedidoAdmin)
-
+	
 
 
 
