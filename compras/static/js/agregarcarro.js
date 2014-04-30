@@ -33,17 +33,44 @@ var nombre_ventana_modal2 = "#myModal2"; // id
                         //var row = '#tr'+idProd;
                         var amen = '#tr'+idProd;
                         var bas = '#trr'+idProd;
+                        var bate = 'trr'+idProd;
+
+                        
 // Tratando de acomodar el boton
                         //$('#tabase > tbody:last').append('<tr id=bas ><td></td></tr>');
                         //$(bas).find("td:first").text(repe);
                         //$(bas).find("td:second").text(namep);
+                        //alert("hola2");
+                        if ($(bas).length){
+ //Ejecutar si existe el elemento
+                            $(bas).find("td:first").text(repe);
+} else {
+
+                        $("#tabase").find('tbody')
+                            .append($('<tr id="bas">')
+                                .append($('<td>')
+                                        .text(repe)
+                                    )
+                                .append($('<td>')
+                                        .text(namep)
+                                    )
+                                .append($('<td>')
+                                        .text()
+                                    )
+                                );
+                            $("#bas").attr("id",bate);
+
+}
+
+
+                         
 
 // FIN Tratando de acomodar el boton
                         //alert(amen);
                         $(amen).find("td:first").text(repe);
                         $(amen).find("td:last").text(preciott);
 
-                        $(bas).find("td:first").text(repe);
+                        
                         //$(amen).find("td:last").text(preciott);
 
 
