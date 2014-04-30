@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Producto, Pedido
+from .models import Producto, Pedido, Lineapedido
 from django.http import HttpResponseRedirect, HttpResponse
 import json as simplejson
 
@@ -536,9 +536,10 @@ def mandarpedido(request):
 		h=llaves.count(k)
 		canti.append(h)
 	print(canti)
+	ped = Pedido.objects.create(usuario=request.user)
 	for x, y in zip(a, canti):
 		e = get_object_or_404(Producto, pk=x)
-		a = Pedido.objects.create(usuario=request.user,productop=e,cantidad=y)
+		o = Lineapedido.objects.create(productop=e,pedidoid=ped,cantidad=y)
 
 
 

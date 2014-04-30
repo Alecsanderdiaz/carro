@@ -10,5 +10,8 @@ class Producto(models.Model):
 class Pedido(models.Model):
 	usuario = models.ForeignKey(User)
 	fecha = models.DateTimeField(auto_now=True)
+
+class Lineapedido(models.Model):
 	productop = models.ForeignKey(Producto)
+	pedidoid = models.ForeignKey(Pedido)
 	cantidad = models.IntegerField(max_length=3)
