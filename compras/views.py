@@ -541,7 +541,7 @@ def mandarpedido(request):
 		e = get_object_or_404(Producto, pk=x)
 		o = Lineapedido.objects.create(productop=e,pedidoid=ped,cantidad=y)
 
-
+	request.session["llavesp"] = []
 
 
 	return HttpResponseRedirect('/inicio')
