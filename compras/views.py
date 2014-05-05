@@ -18,106 +18,138 @@ def home(request):
 	llaves = request.session["llavesp"]
 	if request.method=="POST":
 		if "product_id2" in request.POST:
-			try:
-				print("#################-MODIFICAR-HOME-##################################")
-				id_producto = request.POST['product_id2']
-				cant = request.POST['cantidad']
-				veces = int(cant)
-				print("#################################################################")
-				print("#################################################################")
-				print("#################################################################")
-				#print(llaves)
-				a =unicode(id_producto)
-				print("#########################count###################################")
-				ji = llaves.count(a)
-				print(ji)
-				pu=veces-ji
-				print("#########################pu######################################")
-				print(pu)
+			print("##########################id#######################################")
+			id_producto = request.POST['product_id2']
+			print(id_producto)
+			print("###########################unicode######################################")
+			a =unicode(id_producto)
+			print(a)
+			print("#############################producto####################################")
+			ee = get_object_or_404(Producto, pk=a)
+			print(ee)
+			print("###########################deseada######################################")
+			cant = request.POST['cantidad']
+			print(cant)
+			print("###########################deseadaentera######################################")
+			veces = int(cant)
+			print(veces)
+			print("############################inventatio#####################################")
+			cantinv = request.POST['cantidad2']
+			print(cantinv)
+			print("############################inventarioentera####################################")
+			vecesinv = int(cantinv)
+			print(vecesinv)
+			print("############################resta####################################")
+			blue = vecesinv - veces
+			print(blue)
 
-				if pu > 0:
-					for i in range(pu):
-						llaves.append(a)
-				#print("#################################################################")
-				#print(llaves)
+			if blue >= 0:
+				print("###################sihay####################################")
 
-				if pu < 0:
-					pua = abs(pu)
-					for i in range(pua):
-						llaves.remove(a)
+				try:
+					print("#################-MODIFICAR-HOME-##################################")
+					
+					
+					
+					print("#################################################################")
+					print("#################################################################")
+					print("#################################################################")
+					#print(llaves)
+					
+					print("#########################count###################################")
+					ji = llaves.count(a)
+					print(ji)
+					pu=veces-ji
+					print("#########################pu######################################")
+					print(pu)
 
-				if pu == 0:
-					pass
+					if pu > 0:
+						for i in range(pu):
+							llaves.append(a)
+					#print("#################################################################")
+					#print(llaves)
 
+					if pu < 0:
+						pua = abs(pu)
+						for i in range(pua):
+							llaves.remove(a)
 
-				# if a in llaves:
-				# 	for q in llaves:
-				# 		llaves.remove(a)
-				# print("#################################################################")
-				# print(llaves)
-
-
-
-				# a =set(llaves)
-				# print("############################SET##################################")
-				# print(a)
-
-				# canti=[]
-				# for k in a:
-				# 	h=llaves.count(k)
-				# 	canti.append(h)
-				# print("############################CANTI################################")
-				# print(canti)
-				a =set(llaves)
-				lo = len(a)
-
-				a =set(llaves)
-				print("set---------------------aaaaaaaaaaaaaaaa")
-				print(a)
-
-				canti=[]
-				for k in a:
-					h=llaves.count(k)
-					canti.append(h)
-				print("canti--------------------aaaaaaaaaaaaaaaa")
-				print(canti)
+					if pu == 0:
+						pass
 
 
-				precios = []
-				zk = []
-				for i in a:
-					e = get_object_or_404(Producto, pk=i)
-					zk.append(e)
-					pr = e.precio
-					precios.append(pr)
-
-				xy = [i*j for (i,j) in zip(canti,precios)]
-				print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-				print(xy)
+					# if a in llaves:
+					# 	for q in llaves:
+					# 		llaves.remove(a)
+					# print("#################################################################")
+					# print(llaves)
 
 
 
-				print("zk---------------------aaaaaaaaaaaaaaaa")
-				print(zk)
+					# a =set(llaves)
+					# print("############################SET##################################")
+					# print(a)
 
-				suma = sum(xy)
-				print(suma)
-				st = int(suma/1.16)
-				print(st)
-				iv = int(suma-st)
-				print(iv)
+					# canti=[]
+					# for k in a:
+					# 	h=llaves.count(k)
+					# 	canti.append(h)
+					# print("############################CANTI################################")
+					# print(canti)
+					a =set(llaves)
+					lo = len(a)
 
-				lo = len(xy)
+					a =set(llaves)
+					print("set---------------------aaaaaaaaaaaaaaaa")
+					print(a)
 
-				p = get_object_or_404(Producto, pk=id_producto)
-				mensajea = {"statusa":"True","product_id2":p.id, "nombrep":p.nombre, "rep":veces,"lo":lo, "suma":suma}
-				print(mensajea)
-				request.session["llavesp"] = llaves
+					canti=[]
+					for k in a:
+						h=llaves.count(k)
+						canti.append(h)
+					print("canti--------------------aaaaaaaaaaaaaaaa")
+					print(canti)
+
+
+					precios = []
+					zk = []
+					for i in a:
+						e = get_object_or_404(Producto, pk=i)
+						zk.append(e)
+						pr = e.precio
+						precios.append(pr)
+
+					xy = [i*j for (i,j) in zip(canti,precios)]
+					print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+					print(xy)
+
+
+
+					print("zk---------------------aaaaaaaaaaaaaaaa")
+					print(zk)
+
+					suma = sum(xy)
+					print(suma)
+					st = int(suma/1.16)
+					print(st)
+					iv = int(suma-st)
+					print(iv)
+
+					lo = len(xy)
+
+					p = get_object_or_404(Producto, pk=id_producto)
+					mensajea = {"statusa":"True","product_id2":p.id, "nombrep":p.nombre, "rep":veces,"lo":lo, "suma":suma}
+					print(mensajea)
+					request.session["llavesp"] = llaves
+					return HttpResponse(simplejson.dumps(mensajea),content_type='application/json')
+				except:
+					mensajea = {"statusa":"False"}
+					return HttpResponse(simplejson.dumps(mensajea),content_type='application/json')
+				print("el producto NOOOOOOOOOOOOOOOOOOO esta en request post")
+			else:
+				print("###################nohay####################################")
+				mensajea = {"statusa":"False"}
 				return HttpResponse(simplejson.dumps(mensajea),content_type='application/json')
-			except:
-				mensaje = {"statusa":"False"}
-				return HttpResponse(simplejson.dumps(mensajea),content_type='application/json')
-			print("el producto NOOOOOOOOOOOOOOOOOOO esta en request post")
 
 		else:
 			print("hay un producto product_id")
@@ -537,8 +569,12 @@ def mandarpedido(request):
 		canti.append(h)
 	print(canti)
 	ped = Pedido.objects.create(usuario=request.user)
+
+
 	for x, y in zip(a, canti):
 		e = get_object_or_404(Producto, pk=x)
+		e.stock -= y 
+		e.save()
 		o = Lineapedido.objects.create(productop=e,pedidoid=ped,cantidad=y)
 
 	request.session["llavesp"] = []
@@ -574,3 +610,5 @@ def ingresar(request):
 def cerrar(request):
 	logout(request)
 	return HttpResponseRedirect('/inicio')
+
+	

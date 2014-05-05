@@ -31,6 +31,7 @@
             <th>Formulario</th>
             <th>Producto</th>
             <th>Precio</th>
+            <th>Stock</th>
 <!--             <th>C</th> -->
             
 
@@ -44,6 +45,7 @@
                 <form method="post" class="frmAgregar">
                     {% csrf_token %}
                     <input type="hidden" id="modal_idProducto2" name="product_id2" value="{{p.id}}">
+                    <input type="hidden" id="modal_cantidad" name="cantidad2" value="{{p.stock}}">
                     <input  id="pcantidad" name="cantidad" value="1">
                     <button type="submit" class="btn btn-danger">Agregar</button>
                 </form>
@@ -52,6 +54,26 @@
 
             <td>{{p.nombre}}</td>
             <td>{{p.precio}}</td>
+            <td>{{p.stock}}</td>
+<!--             <td>
+<form method="post" action="https://gateway.payulatam.com/ppp-web-gateway/pb.zul">
+  <input type="image" border="0" alt="" src="http://www.payulatam.com/img_botones_herramientas/boton_pagar_pequeno.png" onClick="this.form.urlOrigen.value = window.location.href;"/>
+  <input name="merchantId" type="hidden" value="510026"/>
+  <input name="accountId" type="hidden" value="511183"/>
+  <input name="description" type="hidden" value="ventilador"/>
+  <input name="referenceCode" type="hidden" value="234"/>
+  <input name="amount" type="hidden" value="9559"/>
+  <input name="tax" type="hidden" value="1280"/>
+  <input name="taxReturnBase" type="hidden" value="8000"/>
+<input name="shipmentValue" value="279" type="hidden"/>
+  <input name="currency" type="hidden" value="COP"/>
+  <input name="lng" type="hidden" value="es"/>
+  <input name="sourceUrl" id="urlOrigen" value="" type="hidden"/>
+  <input name="buttonType" value="SIMPLE" type="hidden"/>
+  <input name="signature" value="1b6327a7409ca9d20ad70229a3200f53a8908a3f9ca540c10aaaecac1e6b401c" type="hidden"/>
+</form>
+
+            </td> -->
 <!--             <td><a href="/inicio/alcarrito/{{p.id}}">C</a></td> -->
 
 
