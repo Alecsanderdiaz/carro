@@ -60,6 +60,7 @@
                 <form method="post" class="frmAgregar">
                     {% csrf_token %}
                     <input type="hidden" id="modal_idProducto2" name="product_id2" value="{{p.id}}">
+                    <input type="hidden" id="modal_cantidad" name="cantidad2" value="{{p.stock}}">
                     <input  id="pcantidad" name="cantidad" value="{{q}}" maxlength="3" size="3">
                     <button type="submit" class="btn btn-danger"><i class="icon-pencil"></i></button>
                 </form>
@@ -82,7 +83,7 @@
             {% csrf_token %}
             <input type="hidden" id="modal_idProducto" name="product_id" value="{{p.id}}">
 
-            <input type="hidden" id="pcantidad" name="cantidade" value="0">
+            
             
             <button type="submit" class="btn btn-danger" id="{{p.id}}"><i class="icon-remove"></i></button>
         </form>
