@@ -35,6 +35,8 @@
           <li> <a href="/inicio/pagina2"> Pagina2 </a> </li>
           <li> <a href="/inicio/pagina3"> Pagina3 </a> </li>
 
+
+
           <!-- Boton Carrito -->
           <div class="btn-group" id="mario">
           <button type="button" class="btn btn-danger dropdown-toggle renault" data-toggle="dropdown">
@@ -81,6 +83,16 @@
           <!-- Fin Boton Carrito -->
 
         </ul>
+
+          <div class="busqueda">
+            <form class="navbar-search pull-left" method="POST" action="/inicio/buscar/">{% csrf_token %}
+              <input type="text" class="search-query" placeholder="Buscar" name="buscalo">
+              <div class="btn-group">
+                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+              </div>
+            </form>
+          </div>
+
       <div class="btn-group">
       {% if user.is_authenticated%}
 

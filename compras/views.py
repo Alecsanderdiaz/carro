@@ -402,4 +402,10 @@ def cerrar(request):
 	logout(request)
 	return HttpResponseRedirect('/inicio')
 
-	
+def buscar(request):
+	# vistas de busqueda
+	if request.method == 'POST':
+		buscar = request.POST['buscalo']
+		productob = Producto.objects.filter(nombre__contains=buscar)
+
+	return render(request,'buscar.html',{'productob':productob})	

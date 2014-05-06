@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^mandarpedido/$','compras.views.mandarpedido', name='mandarpedido'),
     url(r'^ingresar/$','compras.views.ingresar', name='ingresar'),
     url(r'^cerrar/$','compras.views.cerrar', name='cerrar'),
+    url(r'^buscar/$','compras.views.buscar', name='buscar'),
 
 
 
