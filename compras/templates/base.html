@@ -23,188 +23,113 @@
 
 </head>
 <body>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      {% if user.is_authenticated %}
+      <p class="navbar-text pull-right"><a href="/inicio/cerrar">salir</a></p>
+      {% endif %}
+      <a class="brand" href="/inicio/"> Inicio </a>
+        <ul class="nav">
+          <li> <a href="/inicio/carro"> carro </a> </li>
+          <li> <a href="/inicio/vaciarcarro"> vaciar </a> </li>
+          <li> <a href="/inicio/pagina2"> Pagina2 </a> </li>
+          <li> <a href="/inicio/pagina3"> Pagina3 </a> </li>
 
-<!--Modal modificar-->
-<!--  <div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
-    <div class="modal-header">
-    <h3 id="myModalLabel2">Modal Modificar base.html</h3>
-    </div>
-    <div class="modal-body">
-    <p>¿Realmente desea agregar el producto <span id="modal_name2"></span> al carrito?</p>
-    </div>
-    <div class="modal-footer">
-        <form method="post" id="frmAgregar">
-            {% csrf_token %}
-            <input type="hidden" id="modal_idProducto2" name="product_id2">
-            <input  id="pcantidad" name="cantidad" value="1">
-            
-            <button type="submit" class="btn btn-danger" id="{{p.id}}">Si</button>
-        </form>
-    </div>
-</div> -->
-<!--EndModal-->
+          <!-- Boton Carrito -->
+          <div class="btn-group" id="mario">
+          <button type="button" class="btn btn-danger dropdown-toggle renault" data-toggle="dropdown">
+            <i class="icon-shopping-cart"></i>&nbsp;|&nbsp;<span id="cant">{{bu }}</span>&nbsp;items
+          </button>          
+          <ul class="dropdown-menu" role="menu" id="luigi">
+            <table id="tabase">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>C</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% if zk %}
+                {% for p in zk %}
+                  {% for q in canti %}
+                    {% if forloop.counter == forloop.parentloop.counter %}                  
+                      <tr id="trr{{p.id}}">
+                        <td>{{q}}</td>
+                        <td>{{p.nombre}}</td>
+                        <td>
+                          <form method="post" class="frmEliminar">
+                              {% csrf_token %}
+                              <input type="hidden" id="modal_idProducto" name="product_id" value="{{p.id}}">
+                              <input type="hidden" id="pcantidad" name="cantidade" value="0">
+                              <button type="submit" class="btn btn-danger" id="{{p.id}}">
+                                <i class="icon-remove"></i>
+                              </button>
+                          </form>
+                        </td> 
+                      </tr>                       
+                    {% endif %}
+                  {% endfor %}
+                {% endfor %}
+              {% endif %} 
+              </tbody>
+            </table>
+            <li id="sumaba">Total = {{suma}}</li>
+            <li class="divider"></li>
+            <li><a href="/inicio/carro">Mi Carro</a></li>
+          </ul>   
+          </div> 
+          <!-- Fin Boton Carrito -->
 
+        </ul>
+      <div class="btn-group">
+      {% if user.is_authenticated%}
 
-<!--Modal Eliminar-->
-<!--  <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-    <h3 id="myModalLabel">Eliminar Producto</h3>
-    </div>
-    <div class="modal-body">
-    <p>¿Deseas eliminar  el producto <span id="modal_name"></span> del carrito?</p>
-    </div>
-    <div class="modal-footer">
-        <form method="post" id="frmEliminar">
-            {% csrf_token %}
-            <input type="hidden" id="modal_idProducto" name="product_id">
-            <input type="hidden" id="pcantidad" name="cantidad" value="0">
-            <button type="submit" class="btn btn-danger">Aceptar</button>
-        </form>
-    </div>
-</div> -->
-<!--EndModal-->
-
-
-
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-                    {% if user.is_authenticated %}
-              <p class="navbar-text pull-right"><a href="/inicio/cerrar">salir</a></p>
-
-            {% endif %}
-        <a class="brand" href="/inicio/"> Inicio </a>
-          <ul class="nav">
-            <li> <a href="/inicio/carro"> carro </a> </li>
-            <li> <a href="/inicio/vaciarcarro"> vaciar </a> </li>
-            <li> <a href="/inicio/pagina2"> Pagina2 </a> </li>
-            <li> <a href="/inicio/pagina3"> Pagina3 </a> </li>
-
-              <div class="btn-group" id="mario">
-                <button type="button" class="btn btn-danger dropdown-toggle renault" data-toggle="dropdown"><i class="icon-shopping-cart"></i>&nbsp;|&nbsp;<span id="cant">{{bu }}</span>&nbsp;items
-                </button>
-                
-                  <ul class="dropdown-menu" role="menu" id="luigi">
-    
-
-                            <table id="tabase">
-                              <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>C</th>
-                                </tr>
-                              </thead>
-<tbody>
-  {% if zk %}
-                      {% for p in zk %}
-                        {% for q in canti %}
-                          {% if forloop.counter == forloop.parentloop.counter %}
-
-                              
-                                <tr id="trr{{p.id}}">
-                                  <td>{{q}}</td>
-                                  <td>{{p.nombre}}</td>
-
-<td>
-        <form method="post" class="frmEliminar">
-            {% csrf_token %}
-            <input type="hidden" id="modal_idProducto" name="product_id" value="{{p.id}}">
-
-            <input type="hidden" id="pcantidad" name="cantidade" value="0">
-            
-            <button type="submit" class="btn btn-danger" id="{{p.id}}"><i class="icon-remove"></i></button>
-        </form>
-</td> 
-
-
-                                </tr>
-                              
-                            
-                          {% endif %}
-                          {% endfor %}
-                        {% endfor %}
-{% endif %} 
-                        </tbody>
-                        </table>
-                      
-                      
-                      <li id="sumaba">Total = {{suma}}</li>
-                    <li class="divider"></li>
-                    <li><a href="/inicio/carro">Mi Carro</a></li>
-                  </ul>
-                
-
-          </ul>
-
-    <!-- Ingresar -->
-              <div class="btn-group">
-          {% if user.is_authenticated%}
-
-
-          {%else%}
-              <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">login
-              </button>
-            {%endif%}
-              </div>
-<!--  -->
-
+      {%else%}
+        <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">login</button>
+      {%endif%}
       </div>
     </div>
+  </div>
 
-
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-
-
-    <form action="{% url 'ingresar' %}" method="POST">{% csrf_token %}
-        <p>Username: <input id="username-field" name="username" type="text" /></p>
-        <p>Contraseña: <input id="password-field" name="password" type="password" /></p>
-        <p><button type="submit">Login</button></p>
-    </form>
-
-
-          </div>
+<!-- Modal Ingresar -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <form action="{% url 'ingresar' %}" method="POST">{% csrf_token %}
+              <p>Username: <input id="username-field" name="username" type="text" /></p>
+              <p>Contraseña: <input id="password-field" name="password" type="password" /></p>
+              <p><button type="submit">Login</button></p>
+          </form>
         </div>
       </div>
     </div>
-    <!-- Fin Modal -->
+  </div>
+<!-- Fin Modal Ingresar -->
 
+  <div class="container-fluid">
+    <div class="row-fluid">
 
-
-
-
-    <div class="container-fluid">
-      <div class="row-fluid">
-                <div class="span9">
-                  <div class="hero-unit">
-                    {% block contenido %}
-                    {% endblock%}
-                  </div>
-                </div>
-
-                <div class="span3">
-                  <div class="well sidebar-nav">
-                    <ul class="nav nav-list">
-                      <li class="nav-header">últimos agregados</li>
-                      <br>
-                      <!-- <div id="divLista"> -->
-                      </div>
-                    </ul>
-                  </div>
-                </div>
-
+      <div class="span9">
+        <div class="hero-unit">
+          {% block contenido %}
+          {% endblock%}
+        </div>
       </div>
+<!--       
+      <div class="span3">
+        <div class="well sidebar-nav">
+          <ul class="nav nav-list">
+            <li class="nav-header">últimos agregados</li><br>
+          </ul>
+        </div>
+      </div>
+ -->
     </div>
+  </div>
+  <footer>
 
-    
-
-          <footer>
-            <p>&copy; Open Project 2013. Versión Django: {{django_version}}</p> 
-          </footer>
+  </footer>
 </body>
 </html>
 

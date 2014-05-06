@@ -2,102 +2,40 @@
 {% block titulo %}Universal Club{% endblock %}
 {% block contenido %}
 
-
-<!--Modal Agregar-->
-<!--  <div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
-    <div class="modal-header">
-    <h3 id="myModalLabel2">Agregar Producto al Carro</h3>
-    </div>
-    <div class="modal-body">
-    <p>¿Realmente desea agregar el producto <span id="modal_name2"></span> al carrito?</p>
-    </div>
-    <div class="modal-footer">
-        <form method="post" id="frmAgregar">
-            {% csrf_token %}
-            <input type="hidden" id="modal_idProducto2" name="product_id2">
-            <input  id="pcantidad" name="cantidad" value="1">
-            
-            <button type="submit" class="btn btn-danger" id="{{p.id}}">Si</button>
-        </form>
-    </div>
-</div> -->
-<!--EndModal-->
-
-
 {% if Productos %}
-   <table class="table table-hover">
+  <table class="table table-hover">
     <thead>
-        <tr>
-            <th>Formulario</th>
-            <th>Producto</th>
-            <th>Precio</th>
-            <th>Stock</th>
-<!--             <th>C</th> -->
-            
-
-        </tr>
+      <tr>
+        <th>Formulario</th>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Stock</th>        
+      </tr>
     </thead>
-    {% for p in Productos %}
+  {% for p in Productos %}
     <tbody>
-        <tr>
+      <tr>
+        <td>       
+          <form method="post" class="frmAgregar">
+            {% csrf_token %}
+            <input type="hidden" id="modal_idProducto2" name="product_id2" value="{{p.id}}">
+            <input type="hidden" id="modal_cantidad" name="cantidad2" value="{{p.stock}}">
+            <input  id="pcantidad" name="cantidad" value="1">
+            <button type="submit" class="btn btn-danger">Agregar</button>
+          </form>
+        </td>
 
-            <td>       
-                <form method="post" class="frmAgregar">
-                    {% csrf_token %}
-                    <input type="hidden" id="modal_idProducto2" name="product_id2" value="{{p.id}}">
-                    <input type="hidden" id="modal_cantidad" name="cantidad2" value="{{p.stock}}">
-                    <input  id="pcantidad" name="cantidad" value="1">
-                    <button type="submit" class="btn btn-danger">Agregar</button>
-                </form>
-            </td>
+        <td>{{p.nombre}}</td>
 
+        <td>{{p.precio}}</td>
 
-            <td>{{p.nombre}}</td>
-            <td>{{p.precio}}</td>
-            <td>{{p.stock}}</td>
-<!--             <td>
-<form method="post" action="https://gateway.payulatam.com/ppp-web-gateway/pb.zul">
-  <input type="image" border="0" alt="" src="http://www.payulatam.com/img_botones_herramientas/boton_pagar_pequeno.png" onClick="this.form.urlOrigen.value = window.location.href;"/>
-  <input name="merchantId" type="hidden" value="510026"/>
-  <input name="accountId" type="hidden" value="511183"/>
-  <input name="description" type="hidden" value="ventilador"/>
-  <input name="referenceCode" type="hidden" value="234"/>
-  <input name="amount" type="hidden" value="9559"/>
-  <input name="tax" type="hidden" value="1280"/>
-  <input name="taxReturnBase" type="hidden" value="8000"/>
-<input name="shipmentValue" value="279" type="hidden"/>
-  <input name="currency" type="hidden" value="COP"/>
-  <input name="lng" type="hidden" value="es"/>
-  <input name="sourceUrl" id="urlOrigen" value="" type="hidden"/>
-  <input name="buttonType" value="SIMPLE" type="hidden"/>
-  <input name="signature" value="1b6327a7409ca9d20ad70229a3200f53a8908a3f9ca540c10aaaecac1e6b401c" type="hidden"/>
-</form>
+        <td>{{p.stock}}</td>
 
-            </td> -->
-<!--             <td><a href="/inicio/alcarrito/{{p.id}}">C</a></td> -->
-
-
-<!--             <td><a href="#myModal2" role="button" class="btn btn-danger agregue" data-toggle="modal" id="{{p.id}}" data-name="{{p.nombre}}"><i class="icon-shopping-cart"></i>Compre</a></td> -->
-
-
-
-
-
-
-
-        </tr>
+      </tr>
     </tbody>
-    {% endfor %}
-   </table>
-
-
+  {% endfor %}
+  </table>
 {% else %}
-<h2>No existen productos a la venta :( </h2>
-
-
+  <h2>No existen productos a la venta :( </h2>
 {% endif %} 
-
-
-
 {% endblock %}
-

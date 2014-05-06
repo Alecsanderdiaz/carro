@@ -17,20 +17,3 @@ class PedidoAdmin(admin.ModelAdmin):
 
 admin.site.register(Producto)
 admin.site.register(Pedido,PedidoAdmin)
-	
-
-
-
-
-# class RepuestoInline(admin.StackedInline):
-#     model = Repuesto
-#     extra = 3
-
-# class ProductoAdmin(admin.ModelAdmin):
-#     fieldsets = [
-#         ('Producto', {'fields': ['articulo', 'marca', 'referencia']}),
-#         ('Inventario', {'fields': ['cantidad']}),
-#         ('Dimensiones y Peso', {'fields': ['largo', 'ancho', 'alto', 'peso']}),
-#         ('Precios', {'fields': ['preciocompra', 'precioventa', 'preciopromocion']}),
-#     ]
-#     inlines = [RepuestoInline]
